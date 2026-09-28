@@ -1,0 +1,8 @@
+{
+  "name": "decision-panel",
+  "version": "1.0.0",
+  "description": "Evidence-based decision review for everyday use: independent reviewers with different lenses, an evidence gate, checks instead of arguments, a neutral adjudicator, human sign-off on high-stakes calls, and a retro loop that learns from outcomes.",
+  "author": "Lindsey Miller",
+  "license": "MIT",
+  "keywords": ["decision-making", "review", "multi-agent", "risk", "premortem", "adr", "calibration"]
+}

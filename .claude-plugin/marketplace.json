@@ -1,0 +1,15 @@
+{
+  "name": "decision-panel",
+  "owner": {
+    "name": "Lindsey Miller"
+  },
+  "description": "Decision-review tools for Claude Code: evidence-based panel reviews and outcome retros.",
+  "plugins": [
+    {
+      "name": "decision-panel",
+      "source": "./plugins/decision-panel",
+      "description": "Evidence-based decision review: independent lens reviewers, an evidence gate, verification over argument, a neutral adjudicator, human sign-off, and outcome retros.",
+      "version": "1.0.0"
+    }
+  ]
+}
