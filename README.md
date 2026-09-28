@@ -98,17 +98,17 @@ Pick the option that fits how you use Claude.
 
 ### Option 1 — Claude Code, from GitHub (recommended)
 
-Once this repository is published on GitHub (replace `OWNER/decision-panel` with the real path), run these inside Claude Code:
+Once this repository is published on GitHub, run these inside Claude Code:
 
 ```
-/plugin marketplace add OWNER/decision-panel
+/plugin marketplace add elmiller9/decision-panel
 /plugin install decision-panel@decision-panel
 ```
 
 Or from a terminal:
 
 ```bash
-claude plugin marketplace add OWNER/decision-panel
+claude plugin marketplace add elmiller9/decision-panel
 claude plugin install decision-panel@decision-panel
 ```
 
@@ -137,7 +137,7 @@ Commit this to the project's `.claude/settings.json`. Team members are prompted 
 {
   "extraKnownMarketplaces": {
     "decision-panel": {
-      "source": { "source": "github", "repo": "OWNER/decision-panel" }
+      "source": { "source": "github", "repo": "elmiller9/decision-panel" }
     }
   },
   "enabledPlugins": {
@@ -238,13 +238,6 @@ decision-panel/                      ← repository root = the marketplace
         ├── panel-review/            SKILL.md, references/, assets/decision-record.md
         └── decision-retro/          SKILL.md, scripts/calibration.py
 ```
-
-**Before sharing publicly**
-
-1. Add an `author` (and optionally `homepage`, `repository`, `license`) to `plugins/decision-panel/.claude-plugin/plugin.json`, and your name to `owner` in `.claude-plugin/marketplace.json`.
-2. Choose a license and add a `LICENSE` file.
-3. Put the folder in a git repository, push it to GitHub, and replace `OWNER/decision-panel` in this README.
-4. Bump `version` in both `plugin.json` and `marketplace.json` for each release. `claude plugin tag` creates a matching git tag and checks that the two agree.
 
 **Validate after any edit**
 
