@@ -48,7 +48,7 @@ It also **scales to the stakes**. A reversible, low-cost choice gets a one-scree
 |---|---|---|
 | `panel-review` | Skill | The main workflow. Sizes the review to the stakes, frames the decision neutrally, runs independent lens reviewers, applies the evidence gate, verifies what can be checked, adjudicates the rest, and reports. Optionally writes a decision record. |
 | `decision-retro` | Skill | The learning loop. Records how a past decision turned out, judges decision quality separately from luck, checks whether your confidence levels were calibrated, and proposes lessons for specific lenses (added only with your approval). |
-| `lens-reviewer` | Subagent | An independent reviewer that owns one lens (risk, cost, feasibilityâ€¦) and returns evidence-labelled findings. Read-only tools. |
+| `lens-reviewer` | Subagent | An independent reviewer that owns one lens (risk, cost, feasibility…) and returns evidence-labelled findings. Read-only tools. |
 | `verifier` | Subagent | Settles testable claims by checking them (running non-destructive tests, reading sources, computing figures). Asks before anything with side effects. |
 | `steelman` | Subagent | Makes the strongest honest case against the leaning position, or concedes. Read-only tools. |
 | `adjudicator` | Subagent | Rules on contested points using only the evidence, without being told who said what or how many agreed. Escalates high-impact, unresolved risks to you. Read-only tools. |
@@ -59,32 +59,32 @@ It also **scales to the stakes**. A reversible, low-cost choice gets a one-scree
 
 ```
  your question / plan / proposal
-        â”‚
-        â–¼
- 1. Size it â”€â”€â”€â”€â”€â”€â”€â”€â”€â–º Light: one structured pass (premortem, runner-up case, key assumption)
-        â”‚                     â”€â”€â–º recommendation
-        â–¼  Standard / Full
+        │
+        ▼
+ 1. Size it ─────────► Light: one structured pass (premortem, runner-up case, key assumption)
+        │                     ──► recommendation
+        ▼  Standard / Full
  2. Frame a neutral brief (decision, options incl. "do nothing", criteria, evidence)
-        â–¼
+        ▼
  3. Independent lens reviewers, in parallel, each with its own lens and evidence focus
-        â”‚   (they never see each other)
-        â–¼
- 4. Evidence gate â”€ drop claims whose sources don't say what's claimed
-        â–¼
+        │   (they never see each other)
+        ▼
+ 4. Evidence gate ─ drop claims whose sources don't say what's claimed
+        ▼
  5. Contested or decisive claims:
-        â”œâ”€ checkable â”€â”€â”€â”€â–º verifier: VERIFIED / REFUTED / INCONCLUSIVE
-        â””â”€ not checkable â–º steelman â”€â–º adjudicator: UPHELD / REJECTED / NEEDS_HUMAN
-        â–¼
- 6. Report: recommendation Â· confidence Â· what would change it Â· risks Â· dissent
-        â–¼
- 7. Full tier: your sign-off â”€â–º decision record â”€â–º later: decision-retro
+        ├─ checkable ────► verifier: VERIFIED / REFUTED / INCONCLUSIVE
+        └─ not checkable ► steelman ─► adjudicator: UPHELD / REJECTED / NEEDS_HUMAN
+        ▼
+ 6. Report: recommendation · confidence · what would change it · risks · dissent
+        ▼
+ 7. Full tier: your sign-off ─► decision record ─► later: decision-retro
 ```
 
 | Tier | When | Roughly |
 |---|---|---|
 | **Light** | Reversible, low cost of being wrong, or you ask for a quick check | One pass, no subagents |
 | **Standard** | Meaningful but recoverable (the default for most real decisions) | 3 reviewers + verification/adjudication of contested points |
-| **Full** | Hard to undo, expensive, or with security/legal/safety/people impact | 4â€“5 reviewers, every decisive claim verified, your explicit sign-off, a decision record |
+| **Full** | Hard to undo, expensive, or with security/legal/safety/people impact | 4–5 reviewers, every decisive claim verified, your explicit sign-off, a decision record |
 
 Claude sizes the review by the stakes, not by how casually you ask. It tells you which tier it picked and why. Say "just a quick check" or "go deep" to override it.
 
@@ -96,25 +96,25 @@ Pick the option that fits how you use Claude.
 
 > **Before installing any plugin**, read what's in it. Plugins can include instructions and subagents that run tools on your machine. This one's subagents are read-only, except `verifier`, which can run commands and is instructed to ask before anything with side effects.
 
-### Option 1 â€” Claude Code, from GitHub (recommended)
+### Option 1 — Claude Code, from GitHub (recommended)
 
-Once this repository is published on GitHub (replace `elmiller9/decision-panel` with the real path), run these inside Claude Code:
+Once this repository is published on GitHub (replace `OWNER/decision-panel` with the real path), run these inside Claude Code:
 
 ```
-/plugin marketplace add elmiller9/decision-panel
+/plugin marketplace add OWNER/decision-panel
 /plugin install decision-panel@decision-panel
 ```
 
 Or from a terminal:
 
 ```bash
-claude plugin marketplace add elmiller9/decision-panel
+claude plugin marketplace add OWNER/decision-panel
 claude plugin install decision-panel@decision-panel
 ```
 
 Restart Claude Code or run `/reload-plugins`. Update later with `claude plugin update decision-panel@decision-panel`.
 
-### Option 2 â€” Claude Code, from a local folder
+### Option 2 — Claude Code, from a local folder
 
 If you received this as a folder or zip, add the folder as a marketplace:
 
@@ -129,7 +129,7 @@ To try it for a single session without installing anything:
 claude --plugin-dir C:/path/to/decision-panel/plugins/decision-panel
 ```
 
-### Option 3 â€” Turn it on for a whole team's project
+### Option 3 — Turn it on for a whole team's project
 
 Commit this to the project's `.claude/settings.json`. Team members are prompted to install the plugin when they open the project:
 
@@ -137,7 +137,7 @@ Commit this to the project's `.claude/settings.json`. Team members are prompted 
 {
   "extraKnownMarketplaces": {
     "decision-panel": {
-      "source": { "source": "github", "repo": "elmiller9/decision-panel" }
+      "source": { "source": "github", "repo": "OWNER/decision-panel" }
     }
   },
   "enabledPlugins": {
@@ -146,7 +146,7 @@ Commit this to the project's `.claude/settings.json`. Team members are prompted 
 }
 ```
 
-### Option 4 â€” Claude Code without the plugin system
+### Option 4 — Claude Code without the plugin system
 
 Copy the pieces into your personal (all projects) or project folders:
 
@@ -158,9 +158,9 @@ Copy the pieces into your personal (all projects) or project folders:
 
 The skills are then invoked as `/panel-review` and `/decision-retro`, without the `decision-panel:` prefix.
 
-### Option 5 â€” Claude.ai or the Claude desktop app (skills only)
+### Option 5 — Claude.ai or the Claude desktop app (skills only)
 
-Custom skills can be uploaded to Claude.ai and the desktop app (on plans that support them). Zip each skill folder so `SKILL.md` sits inside the folder at the top of the zip â€” for example `panel-review.zip` containing `panel-review/SKILL.md`, `panel-review/references/â€¦` and `panel-review/assets/â€¦` â€” then upload it from the Skills section of Claude's settings. See Anthropic's help center for the current location on your plan.
+Custom skills can be uploaded to Claude.ai and the desktop app (on plans that support them). Zip each skill folder so `SKILL.md` sits inside the folder at the top of the zip — for example `panel-review.zip` containing `panel-review/SKILL.md`, `panel-review/references/…` and `panel-review/assets/…` — then upload it from the Skills section of Claude's settings. See Anthropic's help center for the current location on your plan.
 
 Subagents aren't available there, so `panel-review` runs its lenses one after another in a single conversation. It writes each lens's findings in full before starting the next, and tells you this is a weaker form of independence than separate reviewers. The method still helps; it just helps less.
 
@@ -194,11 +194,11 @@ You can ask naturally; the skill triggers on decision-shaped requests. For small
 
 Everything is plain markdown, so edit freely:
 
-- **Lenses** â€” `plugins/decision-panel/skills/panel-review/references/lenses.md`. Add lenses or domain presets for your field (clinical, legal, data engineering, and so on). Keep one adversarial lens in every review.
-- **Rules** â€” `â€¦/panel-review/references/evidence-and-adjudication.md`: the evidence gate, routing, verification standard, confidence buckets.
-- **Models** â€” each subagent's `model:` line in `plugins/decision-panel/agents/*.md` (`sonnet`, `opus`, `haiku`, `inherit`, or a full model ID). By default the reviewers and steelman run on Sonnet, the adjudicator on Opus, and the verifier on whatever model your session uses. Spreading reviewers across models adds a little independence; giving them different evidence adds more.
-- **Tier thresholds and report format** â€” `â€¦/panel-review/SKILL.md`, Steps 1 and 5.
-- **Decision record template** â€” `â€¦/panel-review/assets/decision-record.md`.
+- **Lenses** — `plugins/decision-panel/skills/panel-review/references/lenses.md`. Add lenses or domain presets for your field (clinical, legal, data engineering, and so on). Keep one adversarial lens in every review.
+- **Rules** — `…/panel-review/references/evidence-and-adjudication.md`: the evidence gate, routing, verification standard, confidence buckets.
+- **Models** — each subagent's `model:` line in `plugins/decision-panel/agents/*.md` (`sonnet`, `opus`, `haiku`, `inherit`, or a full model ID). By default the reviewers and steelman run on Sonnet, the adjudicator on Opus, and the verifier on whatever model your session uses. Spreading reviewers across models adds a little independence; giving them different evidence adds more.
+- **Tier thresholds and report format** — `…/panel-review/SKILL.md`, Steps 1 and 5.
+- **Decision record template** — `…/panel-review/assets/decision-record.md`.
 
 After editing, run `claude plugin validate` (see below).
 
@@ -228,22 +228,22 @@ After editing, run `claude plugin validate` (see below).
 **Repository layout**
 
 ```
-decision-panel/                      â† repository root = the marketplace
-â”œâ”€â”€ .claude-plugin/marketplace.json
-â”œâ”€â”€ README.md
-â””â”€â”€ plugins/decision-panel/          â† the plugin
-    â”œâ”€â”€ .claude-plugin/plugin.json
-    â”œâ”€â”€ agents/                      lens-reviewer, verifier, steelman, adjudicator
-    â””â”€â”€ skills/
-        â”œâ”€â”€ panel-review/            SKILL.md, references/, assets/decision-record.md
-        â””â”€â”€ decision-retro/          SKILL.md, scripts/calibration.py
+decision-panel/                      ← repository root = the marketplace
+├── .claude-plugin/marketplace.json
+├── README.md
+└── plugins/decision-panel/          ← the plugin
+    ├── .claude-plugin/plugin.json
+    ├── agents/                      lens-reviewer, verifier, steelman, adjudicator
+    └── skills/
+        ├── panel-review/            SKILL.md, references/, assets/decision-record.md
+        └── decision-retro/          SKILL.md, scripts/calibration.py
 ```
 
 **Before sharing publicly**
 
 1. Add an `author` (and optionally `homepage`, `repository`, `license`) to `plugins/decision-panel/.claude-plugin/plugin.json`, and your name to `owner` in `.claude-plugin/marketplace.json`.
 2. Choose a license and add a `LICENSE` file.
-3. Put the folder in a git repository, push it to GitHub, and replace `elmiller9/decision-panel` in this README.
+3. Put the folder in a git repository, push it to GitHub, and replace `OWNER/decision-panel` in this README.
 4. Bump `version` in both `plugin.json` and `marketplace.json` for each release. `claude plugin tag` creates a matching git tag and checks that the two agree.
 
 **Validate after any edit**
@@ -267,11 +267,10 @@ Then ask a decision question without naming the skill, to check that it triggers
 
 The method distils a research series on multi-agent AI review systems. Key sources:
 
-- Zhuge et al., *Agent-as-a-Judge: Evaluate Agents with Agents* (arXiv 2410.10934) â€” checking with tools beats judging from text.
-- Verga et al., *Replacing Judges with Juries* (arXiv 2404.18796) â€” diverse panels vs. single judges.
-- Kohli, *Nine Judges, Two Effective Votes* (arXiv 2605.29800); Hossain et al., *Error Dependence in LLM Judge Consensus* (arXiv 2609.22512); Kim et al., *Correlated Errors in Large Language Models* (arXiv 2506.07962) â€” why agreement between models is weak evidence.
-- BertalaniÄ & Fortuna, *The Cost of Consensus* (arXiv 2605.00914); Wynn et al. on debate and sycophancy (arXiv 2509.05396) â€” why reviewers don't debate.
-- *When Identity Skews Debate: Anonymization for Bias-Reduced Multi-Agent Reasoning* (ACL 2026, arXiv 2510.07517); Panickssery et al., *LLM Evaluators Recognize and Favor Their Own Generations* (arXiv 2404.13076) â€” why the adjudicator doesn't see who said what.
-- *Diverse Evidence, Better Forecasts* (arXiv 2607.01661) â€” why reviewers get different evidence.
-- Klein's premortem technique and Duke's *Thinking in Bets* ("resulting") â€” the premortem step and separating decision quality from outcome.
-
+- Zhuge et al., *Agent-as-a-Judge: Evaluate Agents with Agents* (arXiv 2410.10934) — checking with tools beats judging from text.
+- Verga et al., *Replacing Judges with Juries* (arXiv 2404.18796) — diverse panels vs. single judges.
+- Kohli, *Nine Judges, Two Effective Votes* (arXiv 2605.29800); Hossain et al., *Error Dependence in LLM Judge Consensus* (arXiv 2609.22512); Kim et al., *Correlated Errors in Large Language Models* (arXiv 2506.07962) — why agreement between models is weak evidence.
+- Bertalanič & Fortuna, *The Cost of Consensus* (arXiv 2605.00914); Wynn et al. on debate and sycophancy (arXiv 2509.05396) — why reviewers don't debate.
+- *When Identity Skews Debate: Anonymization for Bias-Reduced Multi-Agent Reasoning* (ACL 2026, arXiv 2510.07517); Panickssery et al., *LLM Evaluators Recognize and Favor Their Own Generations* (arXiv 2404.13076) — why the adjudicator doesn't see who said what.
+- *Diverse Evidence, Better Forecasts* (arXiv 2607.01661) — why reviewers get different evidence.
+- Klein's premortem technique and Duke's *Thinking in Bets* ("resulting") — the premortem step and separating decision quality from outcome.
